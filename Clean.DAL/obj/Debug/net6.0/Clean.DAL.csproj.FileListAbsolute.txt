@@ -1,0 +1,17 @@
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/bin/Debug/net6.0/Clean.DAL.deps.json
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/bin/Debug/net6.0/Clean.DAL.runtimeconfig.json
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/bin/Debug/net6.0/Clean.DAL.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/bin/Debug/net6.0/Clean.DAL.pdb
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/bin/Debug/net6.0/Clean.Domain.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/bin/Debug/net6.0/Clean.Domain.pdb
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/obj/Debug/net6.0/Clean.DAL.csproj.AssemblyReference.cache
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/obj/Debug/net6.0/Clean.DAL.GeneratedMSBuildEditorConfig.editorconfig
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/obj/Debug/net6.0/Clean.DAL.AssemblyInfoInputs.cache
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/obj/Debug/net6.0/Clean.DAL.AssemblyInfo.cs
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/obj/Debug/net6.0/Clean.DAL.csproj.CoreCompileInputs.cache
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/obj/Debug/net6.0/Clean.DAL.csproj.CopyComplete
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/obj/Debug/net6.0/Clean.DAL.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/obj/Debug/net6.0/refint/Clean.DAL.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/obj/Debug/net6.0/Clean.DAL.pdb
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/obj/Debug/net6.0/Clean.DAL.genruntimeconfig.cache
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.DAL/obj/Debug/net6.0/ref/Clean.DAL.dll

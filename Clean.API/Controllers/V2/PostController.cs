@@ -1,4 +1,3 @@
-using Clean.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clean.API.Controllers.V2;
@@ -12,12 +11,6 @@ public class PostController : Controller
     [Route("{id}")]
     public IActionResult GetById(int id)
     {
-        var post = new Post
-        {
-            Id = id,
-            Text = "Hello world v2"
-        };
-
-        return Ok(post);
+        return Ok();
     }
 }

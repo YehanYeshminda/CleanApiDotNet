@@ -1,4 +1,3 @@
-using Clean.Domain.Aggregates.PostAggregate;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clean.API.Controllers.V1;
@@ -12,12 +11,6 @@ public class PostsController : Controller
     [Route("{id}")]
     public IActionResult GetById(int id)
     {
-        var post = new Post
-        {
-            Id = id,
-            Text = "Hello world"
-        };
-
-        return Ok(post);
+        return Ok();
     }
 }

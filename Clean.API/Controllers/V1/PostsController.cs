@@ -1,4 +1,4 @@
-using Clean.Domain.Models;
+using Clean.Domain.Aggregates.PostAggregate;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clean.API.Controllers.V1;

@@ -70,3 +70,11 @@
 /Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 /Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/Clean.DAL.dll
 /Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/Clean.DAL.pdb
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/AutoMapper.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/MediatR.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/MediatR.Contracts.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/MediatR.Extensions.Microsoft.DependencyInjection.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/Clean.Application.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/Clean.Application.pdb

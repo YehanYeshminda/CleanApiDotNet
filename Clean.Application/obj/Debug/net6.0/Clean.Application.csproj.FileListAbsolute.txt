@@ -1,0 +1,17 @@
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/bin/Debug/net6.0/Clean.Application.deps.json
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/bin/Debug/net6.0/Clean.Application.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/bin/Debug/net6.0/Clean.Application.pdb
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/bin/Debug/net6.0/Clean.DAL.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/bin/Debug/net6.0/Clean.Domain.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/bin/Debug/net6.0/Clean.DAL.pdb
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/bin/Debug/net6.0/Clean.Domain.pdb
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/obj/Debug/net6.0/Clean.Application.csproj.AssemblyReference.cache
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/obj/Debug/net6.0/Clean.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/obj/Debug/net6.0/Clean.Application.AssemblyInfoInputs.cache
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/obj/Debug/net6.0/Clean.Application.AssemblyInfo.cs
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/obj/Debug/net6.0/Clean.Application.csproj.CoreCompileInputs.cache
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/obj/Debug/net6.0/Clean.Application.csproj.CopyComplete
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/obj/Debug/net6.0/Clean.Application.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/obj/Debug/net6.0/refint/Clean.Application.dll
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/obj/Debug/net6.0/Clean.Application.pdb
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/obj/Debug/net6.0/ref/Clean.Application.dll

@@ -7,6 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
@@ -19,8 +21,14 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Clean.Application\Clean.Application.csproj" />
       <ProjectReference Include="..\Clean.DAL\Clean.DAL.csproj" />
       <ProjectReference Include="..\Clean.Domain\Clean.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Contracts\Post\Requests\" />
+      <Folder Include="Contracts\Post\Responses\" />
     </ItemGroup>
 
 </Project>

@@ -1,9 +1,10 @@
+using Clean.Application.Models;
 using Clean.Domain.Aggregates.UserProfileAggregate;
 using MediatR;
 
 namespace Clean.Application.UserProfiles.Commands;
 
-public class UpdateUserProfileBasicInfoCommand : IRequest
+public class UpdateUserProfileBasicInfoCommand : IRequest<OperationResult<UserProfile>>
 {
     public Guid UserProfileId { get; set; }
     public string FirstName { get; private set; }

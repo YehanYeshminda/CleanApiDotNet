@@ -1,6 +1,8 @@
 using AutoMapper;
+using Clean.API.Contracts.Common;
 using Clean.API.Contracts.UserProfile.Requests;
 using Clean.API.Contracts.UserProfile.Responses;
+using Clean.Application.Enums;
 using Clean.Application.UserProfiles.Commands;
 using Clean.Application.UserProfiles.Queries;
 using Clean.Domain.Aggregates.UserProfileAggregate;
@@ -12,7 +14,7 @@ namespace Clean.API.Controllers.V1;
 [ApiVersion(("1.0"))]
 [Route(ApiRoutes.BaseRoute)]
 [ApiController]
-public class UserProfileController : Controller
+public class UserProfileController : BaseController
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
@@ -89,6 +91,11 @@ public class UserProfileController : Controller
             command.UserProfileId = Guid.Parse(id);
             var response = await _mediator.Send(command);
 
+            if (response.IsError)
+            {
+                return HandleErrorResponse(response.Errors);
+            }
+            
             return NoContent();
         }
         catch (Exception e)

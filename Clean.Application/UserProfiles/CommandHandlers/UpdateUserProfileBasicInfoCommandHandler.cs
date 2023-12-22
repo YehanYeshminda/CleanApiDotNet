@@ -1,3 +1,5 @@
+using Clean.Application.Enums;
+using Clean.Application.Models;
 using Clean.Application.UserProfiles.Commands;
 using Clean.DAL;
 using Clean.Domain.Aggregates.UserProfileAggregate;
@@ -6,25 +8,47 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Clean.Application.UserProfiles.CommandHandlers;
 
-internal class UpdateUserProfileBasicInfoCommandHandler : IRequestHandler<UpdateUserProfileBasicInfoCommand>
+internal class UpdateUserProfileBasicInfoCommandHandler : IRequestHandler<UpdateUserProfileBasicInfoCommand, OperationResult<UserProfile>>
 {
     private readonly DataContext _context;
-
     public UpdateUserProfileBasicInfoCommandHandler(DataContext context)
     {
         _context = context;
     }
     
-    public async Task<Unit> Handle(UpdateUserProfileBasicInfoCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult<UserProfile>> Handle(UpdateUserProfileBasicInfoCommand request, CancellationToken cancellationToken)
     {
-        var userProfile = await _context.UserProfiles.FirstOrDefaultAsync(x => x.UserProfileId == request.UserProfileId);
-        var basicInfo = BasicInfo.CreateBasicInfo(request.FirstName, request.LastName, request.EmailAddress, request.Phone, request.DateOfBirth, request.CurrentCity);
+        var result = new OperationResult<UserProfile>();
         
-        userProfile.UpdateBasicInfo(basicInfo);
-        _context.UserProfiles.Update(userProfile);
+        try
+        {
+            var userProfile = await _context.UserProfiles.FirstOrDefaultAsync(x => x.UserProfileId == request.UserProfileId);
+            
+            if (userProfile is null)
+            {
+                result.IsError = true;
+                var error = new Error { Code = ErrorCodes.NotFound, Message = $"User profile not found with id {request.UserProfileId}" };
+                result.Errors.Add(error);
+                return result;
+            }
+            
+            var basicInfo = BasicInfo.CreateBasicInfo(request.FirstName, request.LastName, request.EmailAddress, request.Phone, request.DateOfBirth, request.CurrentCity);
         
-        await _context.SaveChangesAsync();
+            userProfile.UpdateBasicInfo(basicInfo);
+            _context.UserProfiles.Update(userProfile);
         
-        return new Unit();
+            await _context.SaveChangesAsync();
+            
+            result.Payload = userProfile;
+            return result;
+        }
+        catch (Exception ex)
+        {
+            result.IsError = true;
+            var error = new Error { Code = ErrorCodes.ServerError, Message = ex.Message };
+            result.Errors.Add(error);
+        }
+        
+        return result;
     }
 }

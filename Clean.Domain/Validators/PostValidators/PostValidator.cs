@@ -16,6 +16,12 @@ public class PostValidator : AbstractValidator<Post>
         RuleFor(x => x.UserProfileId)
             .NotNull().WithMessage("Post user profile id is required.")
             .NotEmpty().WithMessage("Post user profile id cannot be empty.")
-            .NotEqual(Guid.Empty).WithMessage("Post user profile id cannot be empty.");
+            .NotEqual(Guid.Empty).WithMessage("Post user profile id cannot be empty.")
+            .Must(BeValidGuid).WithMessage("Post user profile id is not valid.");
+    }
+    
+    private bool BeValidGuid(Guid userProfileId)
+    {
+        return userProfileId != Guid.Empty;
     }
 }

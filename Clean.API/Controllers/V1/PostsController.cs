@@ -49,7 +49,7 @@ public class PostsController : BaseController
     
     [HttpPost]
     [ValidateModel]
-    public async Task<IActionResult> Create([FromBody] PostCreateRequest post)
+    public async Task<IActionResult> CreatePost([FromBody] PostCreateRequest post)
     {
         var command = new PostCreateCommand() { UserProfileId = post.UserProfileId, TextContext = post.TextContext };
         var response = await _mediator.Send(command);
@@ -58,5 +58,20 @@ public class PostsController : BaseController
         
         var mappedResponse = _mapper.Map<PostResponse>(response.Payload);
         return CreatedAtAction(nameof(GetById), new { id = response.Payload.UserProfileId }, mappedResponse);
+    }
+    
+    [HttpPut]
+    [Route(ApiRoutes.Posts.IdRoute)]
+    [ValidateGuid("id")]
+    [ValidateModel]
+    public async Task<IActionResult> UpdatePost(string id, [FromBody] PostUpdateRequest post)
+    {
+        var command = new PostUpdateCommand() { PostId = Guid.Parse(id), TextContext = post.TextContext };
+        var response = await _mediator.Send(command);
+        
+        if (response.IsError) return HandleErrorResponse(response.Errors);
+        
+        var mappedResponse = _mapper.Map<PostResponse>(response.Payload);
+        return Ok(mappedResponse);
     }
 }

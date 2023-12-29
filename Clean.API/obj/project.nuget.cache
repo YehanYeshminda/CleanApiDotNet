@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "3X6dFSlGBVn8RduU2iN+sXO8bcdfu4uesXXEh+4/gH4LSCVprM59G2k6T/heZjJfWh6Z+/cQHKItOxM1SwAOMg==",
+  "dgSpecHash": "6ZRrBe8nS8Qhsyy0SycbrkJkuER+LFZfUdXOptwbcHVGqamGyFkMbh5AHqx/0uy2Do3q4w24FKjKDo9LUHmfZQ==",
   "success": true,
   "projectFilePath": "/Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/Clean.API.csproj",
   "expectedPackageFiles": [
     "/Users/yehanyeshminda/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/Users/yehanyeshminda/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
+    "/Users/yehanyeshminda/.nuget/packages/fluentvalidation/11.9.0/fluentvalidation.11.9.0.nupkg.sha512",
     "/Users/yehanyeshminda/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/Users/yehanyeshminda/.nuget/packages/mediatr/11.0.0/mediatr.11.0.0.nupkg.sha512",
     "/Users/yehanyeshminda/.nuget/packages/mediatr.contracts/1.0.1/mediatr.contracts.1.0.1.nupkg.sha512",

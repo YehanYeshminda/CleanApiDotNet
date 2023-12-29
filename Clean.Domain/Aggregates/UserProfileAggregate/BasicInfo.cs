@@ -1,3 +1,6 @@
+using Clean.Domain.Errors.UserProfileErrors;
+using Clean.Domain.Validators.UserProfileValidators;
+
 namespace Clean.Domain.Aggregates.UserProfileAggregate;
 
 public class BasicInfo
@@ -14,10 +17,11 @@ public class BasicInfo
     public string CurrentCity { get; private set; }
     
     // FACTORY METHOD: CREATE NEW BASIC INFO
-    public static BasicInfo CreateBasicInfo(string firstName, string lastName, string emailAddress, string phone, DateTime dateOfBirth, string currentCity) 
+    public static BasicInfo CreateBasicInfo(string firstName, string lastName, string emailAddress, string phone, DateTime dateOfBirth, string currentCity)
     {
-        // TODO: Add validation error handling
-        return new BasicInfo()
+        var validator = new BasicInfoValidator();
+        
+        var objToValidate = new BasicInfo
         {
             FirstName = firstName,
             LastName = lastName,
@@ -26,5 +30,18 @@ public class BasicInfo
             DateOfBirth = dateOfBirth,
             CurrentCity = currentCity
         };
+
+        var validationResult = validator.Validate(objToValidate);
+
+        if (validationResult.IsValid) return objToValidate;
+        
+        var exception = new UserProfileNotValidException();
+        
+        foreach (var error in validationResult.Errors)
+        {
+            exception.ValidationErrors.Add(error.ErrorMessage);
+        }
+        
+        throw exception;
     }
 }

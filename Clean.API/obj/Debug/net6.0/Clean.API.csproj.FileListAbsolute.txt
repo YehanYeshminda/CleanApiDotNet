@@ -78,3 +78,4 @@
 /Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
 /Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/Clean.Application.dll
 /Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/Clean.Application.pdb
+/Users/yehanyeshminda/Desktop/Office/Clean/Clean.API/bin/Debug/net6.0/FluentValidation.dll

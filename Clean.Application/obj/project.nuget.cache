@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "UgCVq6zJ/uDpGdrFBe4RNQKgSsmI/Ww26KKflzL0zOjnrQWn1QisUfpsiciP4dHlrLJHECDqzP9JQmnkRlVXsg==",
+  "dgSpecHash": "doHMkRKXqmZz7mbdKiUDIPg1pF8PT6NTbLGD7iL7eW5zKGlqL4q6E01bW8nMweQ6HvrzaeoIQbHajHYsw5x9Fw==",
   "success": true,
   "projectFilePath": "/Users/yehanyeshminda/Desktop/Office/Clean/Clean.Application/Clean.Application.csproj",
   "expectedPackageFiles": [
     "/Users/yehanyeshminda/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
+    "/Users/yehanyeshminda/.nuget/packages/fluentvalidation/11.9.0/fluentvalidation.11.9.0.nupkg.sha512",
     "/Users/yehanyeshminda/.nuget/packages/mediatr/11.0.0/mediatr.11.0.0.nupkg.sha512",
     "/Users/yehanyeshminda/.nuget/packages/mediatr.contracts/1.0.1/mediatr.contracts.1.0.1.nupkg.sha512",
     "/Users/yehanyeshminda/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/11.1.0/mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",

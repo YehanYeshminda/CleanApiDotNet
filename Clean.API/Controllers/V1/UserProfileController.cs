@@ -26,8 +26,6 @@ public class UserProfileController : BaseController
     [HttpGet]
     public async Task<IActionResult> GetAllUserProfiles()
     {
-        throw new NotImplementedException("test exception");
-        
         var query = new GetAllUserProfiles();
         var response = await _mediator.Send(query);
         var userProfiles = _mapper.Map<List<UserProfileResponse>>(response.Payload);
@@ -41,7 +39,7 @@ public class UserProfileController : BaseController
         var command = _mapper.Map<CreateUserCommand>(profile);
         var response = await _mediator.Send(command);
         var userProfile = _mapper.Map<UserProfileResponse>(response.Payload);
-        return CreatedAtAction(nameof(GetUserProfileById), new { id = response.Payload.UserProfileId }, userProfile);
+        return response.IsError ? HandleErrorResponse(response.Errors) : CreatedAtAction(nameof(GetUserProfileById), new { id = response.Payload.UserProfileId }, userProfile);
     }
 
     [HttpGet]

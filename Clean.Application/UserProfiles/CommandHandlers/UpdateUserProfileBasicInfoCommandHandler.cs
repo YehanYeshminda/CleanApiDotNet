@@ -20,35 +20,24 @@ internal class UpdateUserProfileBasicInfoCommandHandler : IRequestHandler<Update
     {
         var result = new OperationResult<UserProfile>();
         
-        try
-        {
-            var userProfile = await _context.UserProfiles.FirstOrDefaultAsync(x => x.UserProfileId == request.UserProfileId);
+        var userProfile = await _context.UserProfiles.FirstOrDefaultAsync(x => x.UserProfileId == request.UserProfileId);
             
-            if (userProfile is null)
-            {
-                result.IsError = true;
-                var error = new Error { Code = ErrorCodes.NotFound, Message = $"User profile not found with id {request.UserProfileId}" };
-                result.Errors.Add(error);
-                return result;
-            }
-            
-            var basicInfo = BasicInfo.CreateBasicInfo(request.FirstName, request.LastName, request.EmailAddress, request.Phone, request.DateOfBirth, request.CurrentCity);
-        
-            userProfile.UpdateBasicInfo(basicInfo);
-            _context.UserProfiles.Update(userProfile);
-        
-            await _context.SaveChangesAsync();
-            
-            result.Payload = userProfile;
-            return result;
-        }
-        catch (Exception ex)
+        if (userProfile is null)
         {
             result.IsError = true;
-            var error = new Error { Code = ErrorCodes.ServerError, Message = ex.Message };
+            var error = new Error { Code = ErrorCodes.NotFound, Message = $"User profile not found with id {request.UserProfileId}" };
             result.Errors.Add(error);
+            return result;
         }
+            
+        var basicInfo = BasicInfo.CreateBasicInfo(request.FirstName, request.LastName, request.EmailAddress, request.Phone, request.DateOfBirth, request.CurrentCity);
         
+        userProfile.UpdateBasicInfo(basicInfo);
+        _context.UserProfiles.Update(userProfile);
+        
+        await _context.SaveChangesAsync();
+            
+        result.Payload = userProfile;
         return result;
     }
 }

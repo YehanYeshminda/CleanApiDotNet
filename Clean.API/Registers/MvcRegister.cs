@@ -1,3 +1,4 @@
+using Clean.API.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 
@@ -7,7 +8,11 @@ public class MvcRegister : IWebApplicationBuilderRegister
 {
     public void RegisterServices(WebApplicationBuilder builder)
     {
-        builder.Services.AddControllers();
+        builder.Services.AddControllers(config =>
+        {
+            config.Filters.Add(typeof(GeneralExceptionHandler));
+        });
+            
         builder.Services.AddApiVersioning(config =>
         {
             config.DefaultApiVersion = new ApiVersion(1, 0);

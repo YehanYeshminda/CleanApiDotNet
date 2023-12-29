@@ -1,3 +1,4 @@
+using Clean.Application.Models;
 using Clean.Application.UserProfiles.Queries;
 using Clean.DAL;
 using Clean.Domain.Aggregates.UserProfileAggregate;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Clean.Application.UserProfiles.QueryHandlers;
 
-internal class GetAllUserProfilesQueryHandler : IRequestHandler<GetAllUserProfiles, IEnumerable<UserProfile>>
+internal class GetAllUserProfilesQueryHandler : IRequestHandler<GetAllUserProfiles, OperationResult<IEnumerable<UserProfile>>>
 {
     private readonly DataContext _context;
 
@@ -15,8 +16,10 @@ internal class GetAllUserProfilesQueryHandler : IRequestHandler<GetAllUserProfil
         _context = context;
     }
     
-    public async Task<IEnumerable<UserProfile>> Handle(GetAllUserProfiles request, CancellationToken cancellationToken)
+    public async Task<OperationResult<IEnumerable<UserProfile>>> Handle(GetAllUserProfiles request, CancellationToken cancellationToken)
     {
-        return await _context.UserProfiles.ToListAsync();
+        var result = new OperationResult<IEnumerable<UserProfile>>();
+        result.Payload = await _context.UserProfiles.ToListAsync();;
+        return result;
     }
 }

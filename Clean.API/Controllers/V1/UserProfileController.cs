@@ -1,11 +1,9 @@
 using AutoMapper;
-using Clean.API.Contracts.Common;
 using Clean.API.Contracts.UserProfile.Requests;
 using Clean.API.Contracts.UserProfile.Responses;
-using Clean.Application.Enums;
+using Clean.API.Filters;
 using Clean.Application.UserProfiles.Commands;
 using Clean.Application.UserProfiles.Queries;
-using Clean.Domain.Aggregates.UserProfileAggregate;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,96 +26,60 @@ public class UserProfileController : BaseController
     [HttpGet]
     public async Task<IActionResult> GetAllUserProfiles()
     {
-        try
-        {
-            var query = new GetAllUserProfiles();
-            var response = await _mediator.Send(query);
-            var userProfiles = _mapper.Map<List<UserProfileResponse>>(response);
+        throw new NotImplementedException("test exception");
         
-            return Ok(userProfiles);
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
+        var query = new GetAllUserProfiles();
+        var response = await _mediator.Send(query);
+        var userProfiles = _mapper.Map<List<UserProfileResponse>>(response.Payload);
+        return Ok(userProfiles);
     }
     
     [HttpPost]
+    [ValidateModel]
     public async Task<IActionResult> Create([FromBody] UserProfileCreateUpdate profile)
     {
-        try
-        {
-            // Destination to map is the command and map from the profile
-            var command = _mapper.Map<CreateUserCommand>(profile);
-            var response = await _mediator.Send(command);
-            var userProfile = _mapper.Map<UserProfileResponse>(response);
-
-            return CreatedAtAction(nameof(GetUserProfileById), new { id = response.UserProfileId }, userProfile);
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
+        var command = _mapper.Map<CreateUserCommand>(profile);
+        var response = await _mediator.Send(command);
+        var userProfile = _mapper.Map<UserProfileResponse>(response.Payload);
+        return CreatedAtAction(nameof(GetUserProfileById), new { id = response.Payload.UserProfileId }, userProfile);
     }
 
     [HttpGet]
     [Route(ApiRoutes.UserProfiles.IdRoute)]
+    [ValidateGuid("id")]
     public async Task<IActionResult> GetUserProfileById(string id)
     {
-        try
-        {
-            var query = new GetUserProfileById { UserProfileId = Guid.Parse(id) };
-            var response = await _mediator.Send(query);
-
-            if (response is null) return NotFound($"User with the {id} is not found");
+        var query = new GetUserProfileById { UserProfileId = Guid.Parse(id) };
+        var response = await _mediator.Send(query);
             
-            var userProfile = _mapper.Map<UserProfileResponse>(response);
+        if (response.IsError) return HandleErrorResponse(response.Errors);
+        
+        var userProfile = _mapper.Map<UserProfileResponse>(response.Payload);
             
-            return Ok(userProfile);
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
+        return Ok(userProfile);
     }
 
     [HttpPatch]
     [Route(ApiRoutes.UserProfiles.IdRoute)]
+    [ValidateModel]
+    [ValidateGuid("id")]
     public async Task<IActionResult> UpdateUserProfile(string id, [FromBody] UserProfileCreateUpdate updatedProfile)
     {
-        try
-        {
-            var command = _mapper.Map<UpdateUserProfileBasicInfoCommand>(updatedProfile); 
-            command.UserProfileId = Guid.Parse(id);
-            var response = await _mediator.Send(command);
-
-            if (response.IsError)
-            {
-                return HandleErrorResponse(response.Errors);
-            }
-            
-            return NoContent();
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
+        var command = _mapper.Map<UpdateUserProfileBasicInfoCommand>(updatedProfile); 
+        command.UserProfileId = Guid.Parse(id);
+        var response = await _mediator.Send(command);
+        return response.IsError ? HandleErrorResponse(response.Errors) : NoContent();
     }
 
     [HttpDelete]
     [Route(ApiRoutes.UserProfiles.IdRoute)]
+    [ValidateGuid("id")]
     public async Task<IActionResult> DeleteUserProfile(string id)
     {
-        try
-        {
-            var command = new DeleteUserProfileCommand { UserProfileId = Guid.Parse(id) };
-            var response = await _mediator.Send(command);
-
-            return NoContent();
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
+        
+        var command = new DeleteUserProfileCommand { UserProfileId = Guid.Parse(id) };
+        var response = await _mediator.Send(command);
+        
+        return response.IsError ? HandleErrorResponse(response.Errors) : NoContent();
     }
 }

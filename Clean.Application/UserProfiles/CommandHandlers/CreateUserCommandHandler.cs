@@ -42,7 +42,13 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Opera
                 var error = new Error { Code = ErrorCodes.ValidationError, Message = $"{errorMessage}"};
                 result.Errors.Add(error);
             }
-            
+            return result;
+        }
+        catch (Exception e)
+        {
+            var error = new Error { Code = ErrorCodes.ServerError, Message = $"{e.Message}"};
+            result.Errors.Add(error);
+            result.IsError = true;
             return result;
         }
     }

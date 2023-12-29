@@ -1,4 +1,6 @@
 using Clean.Domain.Aggregates.UserProfileAggregate;
+using Clean.Domain.Errors.PostErrors;
+using Clean.Domain.Validators.PostValidators;
 
 namespace Clean.Domain.Aggregates.PostAggregate;
 
@@ -29,18 +31,40 @@ public class Post
     // FACTORY METHOD: CREATE NEW POST
     public static Post CreatePost(Guid userProfileId, string textContext)
     {
-        return new Post
+        var validator = new PostValidator();
+        
+        var objToValidate = new Post
         {
             UserProfileId = userProfileId,
             TextContext = textContext,
             CreatedTime = DateTime.UtcNow,
             LastModified = DateTime.UtcNow
         };
+        
+        var validationResult = validator.Validate(objToValidate);
+        
+        if (validationResult.IsValid) return objToValidate;
+        
+        var exception = new PostNotValidException();
+        
+        foreach (var error in validationResult.Errors)
+        {
+            exception.ValidationErrors.Add(error.ErrorMessage);
+        }
+        
+        throw exception;
     }
     
     // FACTORY METHOD: UPDATE EXISTING POST TEXT
     public void UpdatePostText(string textContext)
     {
+        if (string.IsNullOrWhiteSpace(textContext))
+        {
+            var error = new PostNotValidException("Cannot update post. " + "Post text is not valid.");
+            error.ValidationErrors.Add("Post text is not valid.");
+            throw error;
+        }
+
         TextContext = textContext;
         LastModified = DateTime.UtcNow;
     }

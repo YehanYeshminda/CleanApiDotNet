@@ -1,16 +1,10 @@
+using Clean.Domain.Errors.ValidityExceptions;
+
 namespace Clean.Domain.Errors.UserProfileErrors;
 
-public class UserProfileNotValidException : Exception
+public class UserProfileNotValidException : NotValidException
 {
-    internal UserProfileNotValidException()
-    {
-        ValidationErrors = new List<string>();
-    }
-    
-    internal UserProfileNotValidException(string message) : base(message)
-    {
-        ValidationErrors = new List<string>();
-    }
-    
-    public List<string> ValidationErrors { get; }
+    internal UserProfileNotValidException() { }
+    internal UserProfileNotValidException(string message) : base(message) { }
+    internal UserProfileNotValidException(string message, Exception innerException) : base(message, innerException) { }
 }

@@ -26,9 +26,4 @@
       <ProjectReference Include="..\Clean.Domain\Clean.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Contracts\Post\Requests\" />
-      <Folder Include="Contracts\Post\Responses\" />
-    </ItemGroup>
-
 </Project>

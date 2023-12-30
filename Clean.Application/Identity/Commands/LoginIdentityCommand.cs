@@ -1,9 +1,10 @@
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Clean.Application.Models;
+using MediatR;
 
-namespace Clean.API.Contracts.Identity;
+namespace Clean.Application.Identity.Commands;
 
-public class LoginContract
+public class LoginIdentityCommand : IRequest<OperationResult<string>>
 {
     [EmailAddress]
     [Required]

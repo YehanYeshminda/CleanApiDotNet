@@ -8,4 +8,6 @@ public enum ErrorCodes
     ValidationError = 422,
     ExistingIdentityUser = 550,
     IdentityUserCreationFailed = 551,
+    Unauthorized = 552,
+    InvalidPasswordEmail = 402,
 }

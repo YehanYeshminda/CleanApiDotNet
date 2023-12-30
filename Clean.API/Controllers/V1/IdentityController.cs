@@ -35,4 +35,18 @@ public class IdentityController : BaseController
 
         return Ok(authenticationResult);
     }
+    
+    [HttpPost]
+    [Route(ApiRoutes.Identity.Login)]
+    [ValidateModel]
+    public async Task<IActionResult> Login([FromBody] LoginContract request)
+    {
+        var command = _mapper.Map<LoginIdentityCommand>(request);
+        var result = await _mediator.Send(command);
+        
+        if (result.IsError) return HandleErrorResponse(result.Errors);
+        
+        var authenticationResult = new AuthenticationResponse() { Token = result.Payload };
+        return Ok(authenticationResult);
+    }
 }

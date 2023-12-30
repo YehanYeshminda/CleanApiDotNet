@@ -23,7 +23,6 @@ public class PostComment
         
         var objToValidate = new PostComment
         {
-            CommentId = Guid.NewGuid(),
             PostId = postId,
             Text = text,
             UserProfileId = userProfileId,

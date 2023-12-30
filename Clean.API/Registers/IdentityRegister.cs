@@ -1,6 +1,7 @@
 using System.Text;
 using Clean.Application.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Clean.API.Registers;
@@ -14,8 +15,9 @@ public class IdentityRegister : IWebApplicationBuilderRegister
 
         var jwtSection = builder.Configuration.GetSection(nameof(JwtSettings));
         builder.Services.Configure<JwtSettings>(jwtSection);
-
-        builder.Services.AddAuthentication(a =>
+        
+        builder.Services
+            .AddAuthentication(a =>
             {
                 a.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 a.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -38,8 +40,6 @@ public class IdentityRegister : IWebApplicationBuilderRegister
 
                 jwt.Audience = jwtSettings.Audience[0];
                 jwt.ClaimsIssuer = jwtSettings.Issuer;
-                
-                
             });
     }
 }

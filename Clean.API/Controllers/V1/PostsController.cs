@@ -7,6 +7,7 @@ using Clean.Application.Enums;
 using Clean.Application.Posts.Commands;
 using Clean.Application.Posts.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clean.API.Controllers.V1;
@@ -14,6 +15,7 @@ namespace Clean.API.Controllers.V1;
 [ApiVersion(("1.0"))]
 [Route(ApiRoutes.BaseRoute)]
 [ApiController]
+[Authorize]
 public class PostsController : BaseController
 {
     private readonly IMapper _mapper;

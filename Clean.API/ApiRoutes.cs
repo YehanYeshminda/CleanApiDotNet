@@ -15,4 +15,10 @@ public class ApiRoutes
         public const string PostComments = "{postId}/comments";
         public const string CommentById = "comment/{commentId}";
     }
+
+    public static class Identity
+    {
+        public const string Login = "login";
+        public const string Register = "register";
+    }
 }

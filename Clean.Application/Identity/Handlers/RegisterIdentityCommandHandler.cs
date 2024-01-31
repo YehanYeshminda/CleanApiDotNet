@@ -5,6 +5,7 @@ using Clean.Application.Enums;
 using Clean.Application.Identity.Commands;
 using Clean.Application.Models;
 using Clean.Application.Options;
+using Clean.Application.Services;
 using Clean.DAL;
 using Clean.Domain.Aggregates.UserProfileAggregate;
 using MediatR;
@@ -18,13 +19,13 @@ public class RegisterIdentityCommandHandler : IRequestHandler<RegisterIdentityCo
 {
     private readonly DataContext _context;
     private readonly UserManager<IdentityUser> _userManager;
-    private readonly JwtSettings _jwtSettings;
+    private readonly IdentityService _identityService;
 
-    public RegisterIdentityCommandHandler(DataContext context, UserManager<IdentityUser> userManager, IOptions<JwtSettings> jwtSettings)
+    public RegisterIdentityCommandHandler(DataContext context, UserManager<IdentityUser> userManager, IOptions<JwtSettings> jwtSettings, IdentityService identityService)
     {
         _context = context;
         _userManager = userManager;
-        _jwtSettings = jwtSettings.Value;
+        _identityService = identityService;
     }
     
     public async Task<OperationResult<string>> Handle(RegisterIdentityCommand request, CancellationToken cancellationToken)
@@ -50,7 +51,6 @@ public class RegisterIdentityCommandHandler : IRequestHandler<RegisterIdentityCo
             };
 
             using var transaction = _context.Database.BeginTransaction();
-            
             
             var profileInfo = BasicInfo.CreateBasicInfo(request.FirstName, request.LastName, request.EmailAdress, request.Phone, request.DateOfBirth, request.CurrentCity);
             
@@ -100,29 +100,17 @@ public class RegisterIdentityCommandHandler : IRequestHandler<RegisterIdentityCo
             
             await transaction.CommitAsync();
             
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_jwtSettings.SigningKey);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            var claimsIdentity = new ClaimsIdentity(new Claim[]
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim("Id", identity.Id),
-                    new Claim(JwtRegisteredClaimNames.Sub, identity.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, identity.Email),
-                    new Claim("UserProfileId", userProfile.UserProfileId.ToString())
-                }),
-                
-                Expires = DateTime.Now.AddHours(9),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
-                Audience = _jwtSettings.Audience[0],
-                Issuer = _jwtSettings.Issuer
-            };
-            
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
-            
-            result.Payload = tokenString;
+                new Claim("Id", existingIdentity.Id),
+                new Claim(JwtRegisteredClaimNames.Sub, existingIdentity.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, existingIdentity.Email),
+                new Claim("UserProfileId", userProfile.UserProfileId.ToString())
+            });
+
+            var token = _identityService.CreateSecurityToken(claimsIdentity);
+            result.Payload = _identityService.WriteToken(token);
             return result;
         }
         catch (Exception ex)
